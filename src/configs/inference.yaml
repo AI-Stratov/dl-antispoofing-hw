@@ -1,0 +1,19 @@
+defaults:
+  - model: lcnn
+  - metrics: asvspoof
+  - datasets: asvspoof_eval
+  - dataloader: asvspoof
+  - transforms: asvspoof
+  - _self_
+
+data_root: data/dummy/LA/LA
+
+inferencer:
+  device_tensors: ["data_object", "labels"]
+  device: auto
+  save_path: "asvspoof"
+
+  predictions_name: "avistratov"
+  seed: 1
+
+  from_pretrained: "saved/lcnn_fft/checkpoint-epoch20.pth"

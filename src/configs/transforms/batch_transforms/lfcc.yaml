@@ -1,0 +1,6 @@
+train:
+  data_object:
+    _target_: src.transforms.LFCC
+inference:
+  data_object:
+    _target_: src.transforms.LFCC

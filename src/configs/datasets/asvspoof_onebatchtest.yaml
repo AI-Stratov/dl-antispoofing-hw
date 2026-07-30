@@ -1,0 +1,17 @@
+
+train:
+  _target_: src.datasets.ASVspoof2019LADataset
+  protocol_path: ${data_root}/ASVspoof2019_LA_cm_protocols/ASVspoof2019.LA.cm.train.trn.txt
+  audio_dir: ${data_root}/ASVspoof2019_LA_train/flac
+  max_length: 77870
+  random_crop: False
+  max_per_class: 4
+  instance_transforms: ${transforms.instance_transforms.train}
+val:
+  _target_: src.datasets.ASVspoof2019LADataset
+  protocol_path: ${data_root}/ASVspoof2019_LA_cm_protocols/ASVspoof2019.LA.cm.train.trn.txt
+  audio_dir: ${data_root}/ASVspoof2019_LA_train/flac
+  max_length: 77870
+  random_crop: False
+  max_per_class: 4
+  instance_transforms: ${transforms.instance_transforms.inference}

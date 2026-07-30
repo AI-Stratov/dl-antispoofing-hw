@@ -1,0 +1,34 @@
+[project]
+name = "deep-learning-hw"
+version = "0.1.0"
+description = "LCNN countermeasure for the ASVspoof 2019 LA task"
+
+requires-python = ">=3.10,<3.14"
+
+dependencies = [
+    "torch",
+    "torchvision",
+    "torchaudio",
+    "torchmetrics",
+    "numpy",
+    "tqdm",
+    "matplotlib",
+    "pandas",
+    "soundfile",
+    "wandb",
+    "comet-ml",
+    "hydra-core",
+]
+
+[project.optional-dependencies]
+dev = ["black", "isort", "flake8", "pre-commit"]
+
+[[tool.uv.index]]
+name = "pytorch-cu124"
+url = "https://download.pytorch.org/whl/cu124"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cu124", marker = "sys_platform != 'darwin'" }]
+torchvision = [{ index = "pytorch-cu124", marker = "sys_platform != 'darwin'" }]
+torchaudio = [{ index = "pytorch-cu124", marker = "sys_platform != 'darwin'" }]

@@ -1,0 +1,9 @@
+_target_: src.logger.WandBWriter
+project_name: "asvspoof-lcnn"
+
+entity: null
+run_name: "lcnn_fft"
+mode: "online"
+loss_names: ["loss"]
+log_checkpoints: False
+id_length: 8

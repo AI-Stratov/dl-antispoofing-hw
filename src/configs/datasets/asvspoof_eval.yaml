@@ -1,0 +1,7 @@
+test:
+  _target_: src.datasets.ASVspoof2019LADataset
+  protocol_path: ${data_root}/ASVspoof2019_LA_cm_protocols/ASVspoof2019.LA.cm.eval.trl.txt
+  audio_dir: ${data_root}/ASVspoof2019_LA_eval/flac
+  max_length: 77870
+  random_crop: False
+  instance_transforms: ${transforms.instance_transforms.inference}

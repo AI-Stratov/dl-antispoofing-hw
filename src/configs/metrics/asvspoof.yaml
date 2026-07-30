@@ -1,0 +1,14 @@
+device: "auto"
+
+train:
+  - _target_: src.metrics.ExampleMetric
+    metric:
+      _target_: torchmetrics.classification.BinaryAccuracy
+    device: ${metrics.device}
+    name: "TRAIN_Accuracy"
+inference:
+  - _target_: src.metrics.ExampleMetric
+    metric:
+      _target_: torchmetrics.classification.BinaryAccuracy
+    device: ${metrics.device}
+    name: "Accuracy"

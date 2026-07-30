@@ -1,0 +1,10 @@
+train:
+  data_object:
+    _target_: src.transforms.LogPowerSpectrogram
+    n_fft: 1724
+    hop_length: 130
+inference:
+  data_object:
+    _target_: src.transforms.LogPowerSpectrogram
+    n_fft: 1724
+    hop_length: 130
