@@ -15,16 +15,13 @@ def compute_det_curve(target_scores, nontarget_scores):
         (np.ones(target_scores.size), np.zeros(nontarget_scores.size))
     )
 
-
     indices = np.argsort(all_scores, kind="mergesort")
     labels = labels[indices]
-
 
     tar_trial_sums = np.cumsum(labels)
     nontarget_trial_sums = nontarget_scores.size - (
         np.arange(1, n_scores + 1) - tar_trial_sums
     )
-
 
     frr = np.concatenate((np.atleast_1d(0), tar_trial_sums / target_scores.size))
 
@@ -106,10 +103,8 @@ class EER:
         bonafide = scores[labels == BONAFIDE]
         spoof = scores[labels == SPOOF]
         if len(bonafide) == 0 or len(spoof) == 0:
-
             return float("nan")
 
         eer, _ = compute_eer(bonafide, spoof)
-
 
         return float(eer) * 100

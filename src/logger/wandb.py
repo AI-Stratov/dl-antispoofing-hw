@@ -61,7 +61,6 @@ class WandBWriter:
 
         self.step = 0
 
-
         self.mode = ""
         self.timer = datetime.now()
 

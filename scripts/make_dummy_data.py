@@ -17,7 +17,6 @@ import torchaudio
 
 SAMPLE_RATE = 16000
 PARTITIONS = {
-
     "train": ("LA_T", "ASVspoof2019.LA.cm.train.trn.txt"),
     "dev": ("LA_D", "ASVspoof2019.LA.cm.dev.trl.txt"),
     "eval": ("LA_E", "ASVspoof2019.LA.cm.eval.trl.txt"),
@@ -50,7 +49,6 @@ def make_partition(root, partition, n_utterances, generator):
 
     lines = []
     for i in range(n_utterances):
-
         is_spoof = i % 5 != 0
         utterance_id = f"{prefix}_{i:07d}"
         speaker_id = f"LA_{i % 4:04d}"
@@ -76,7 +74,6 @@ def main():
     args = parser.parse_args()
 
     generator = torch.Generator().manual_seed(args.seed)
-
 
     root = Path(args.output_dir) / "LA" / "LA"
     for partition in PARTITIONS:

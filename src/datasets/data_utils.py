@@ -62,9 +62,7 @@ def get_dataloaders(config, device):
     batch_transforms = instantiate(config.transforms.batch_transforms)
     move_batch_transforms_to_device(batch_transforms, device)
 
-
     datasets = instantiate(config.datasets)
-
 
     dataloaders = {}
     for dataset_partition in config.datasets.keys():

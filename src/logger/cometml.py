@@ -80,7 +80,6 @@ class CometMLWriter:
 
         self.step = 0
 
-
         self.mode = ""
         self.timer = datetime.now()
 
@@ -131,7 +130,6 @@ class CometMLWriter:
             checkpoint_path (str): path to the checkpoint file.
             save_dir (str): path to the dir, where checkpoint is saved.
         """
-
 
         self.exp.log_model(
             name="checkpoints", file_or_folder=checkpoint_path, overwrite=True
@@ -220,9 +218,7 @@ class CometMLWriter:
             bins (int | str): the definition of bins for the histogram.
         """
 
-
         values_for_hist = values_for_hist.detach().cpu().numpy()
-
 
         self.exp.log_histogram_3d(
             values=values_for_hist, name=self._object_name(hist_name), step=self.step

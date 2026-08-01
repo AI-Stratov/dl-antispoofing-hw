@@ -34,22 +34,17 @@ def main(config):
 
     device = resolve_device(config.trainer.device)
 
-
     dataloaders, batch_transforms = get_dataloaders(config, device)
-
 
     model = instantiate(config.model).to(device)
     logger.info(model)
 
-
     loss_function = instantiate(config.loss_function).to(device)
     metrics = instantiate(config.metrics)
-
 
     trainable_params = filter(lambda p: p.requires_grad, model.parameters())
     optimizer = instantiate(config.optimizer, params=trainable_params)
     lr_scheduler = instantiate(config.lr_scheduler, optimizer=optimizer)
-
 
     epoch_len = config.trainer.get("epoch_len")
 

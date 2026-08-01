@@ -72,13 +72,10 @@ class BaseTrainer:
         self.lr_scheduler = lr_scheduler
         self.batch_transforms = batch_transforms
 
-
         self.train_dataloader = dataloaders["train"]
         if epoch_len is None:
-
             self.epoch_len = len(self.train_dataloader)
         else:
-
             self.train_dataloader = inf_loop(self.train_dataloader)
             self.epoch_len = epoch_len
 
@@ -86,18 +83,12 @@ class BaseTrainer:
             k: v for k, v in dataloaders.items() if k != "train"
         }
 
-
         self._last_epoch = 0
         self.start_epoch = 1
         self.epochs = self.cfg_trainer.n_epochs
 
-
-        self.save_period = (
-            self.cfg_trainer.save_period
-        )
-        self.monitor = self.cfg_trainer.get(
-            "monitor", "off"
-        )
+        self.save_period = self.cfg_trainer.save_period
+        self.monitor = self.cfg_trainer.get("monitor", "off")
 
         if self.monitor == "off":
             self.mnt_mode = "off"
@@ -111,9 +102,7 @@ class BaseTrainer:
             if self.early_stop <= 0:
                 self.early_stop = inf
 
-
         self.writer = writer
-
 
         self.metrics = metrics
         self.train_metrics = MetricTracker(
@@ -127,7 +116,6 @@ class BaseTrainer:
             *[m.name for m in self.metrics["inference"]],
             writer=self.writer,
         )
-
 
         self.checkpoint_dir = (
             ROOT_PATH / config.trainer.save_dir / config.writer.run_name
@@ -164,14 +152,11 @@ class BaseTrainer:
             self._last_epoch = epoch
             result = self._train_epoch(epoch)
 
-
             logs = {"epoch": epoch}
             logs.update(result)
 
-
             for key, value in logs.items():
                 self.logger.info(f"    {key:15s}: {value}")
-
 
             best, stop_process, not_improved_count = self._monitor_performance(
                 logs, not_improved_count
@@ -217,7 +202,6 @@ class BaseTrainer:
 
             self.train_metrics.update("grad_norm", self._get_grad_norm())
 
-
             if batch_idx % self.log_step == 0:
                 self.writer.set_step((epoch - 1) * self.epoch_len + batch_idx)
                 self.logger.debug(
@@ -231,14 +215,12 @@ class BaseTrainer:
                 self._log_scalars(self.train_metrics)
                 self._log_batch(batch_idx, batch)
 
-
                 last_train_metrics = self.train_metrics.result()
                 self.train_metrics.reset()
             if batch_idx + 1 >= self.epoch_len:
                 break
 
         logs = last_train_metrics
-
 
         for part, dataloader in self.evaluation_dataloaders.items():
             val_logs = self._evaluation_epoch(epoch, part, dataloader)
@@ -272,9 +254,7 @@ class BaseTrainer:
                 )
             self.writer.set_step(epoch * self.epoch_len, part)
             self._log_scalars(self.evaluation_metrics)
-            self._log_batch(
-                batch_idx, batch, part
-            )
+            self._log_batch(batch_idx, batch, part)
 
         return self.evaluation_metrics.result()
 
@@ -299,8 +279,6 @@ class BaseTrainer:
         stop_process = False
         if self.mnt_mode != "off":
             try:
-
-
                 if self.mnt_mode == "min":
                     improved = logs[self.mnt_metric] <= self.mnt_best
                 elif self.mnt_mode == "max":
@@ -497,11 +475,9 @@ class BaseTrainer:
         resume_path = str(resume_path)
         self.logger.info(f"Loading checkpoint: {resume_path} ...")
 
-
         checkpoint = torch.load(resume_path, self.device, weights_only=False)
         self.start_epoch = checkpoint["epoch"] + 1
         self.mnt_best = checkpoint["monitor_best"]
-
 
         if checkpoint["config"]["model"] != self.config["model"]:
             self.logger.warning(
@@ -509,7 +485,6 @@ class BaseTrainer:
                 "of the checkpoint. This may yield an exception when state_dict is loaded."
             )
         self.model.load_state_dict(checkpoint["state_dict"])
-
 
         if (
             checkpoint["config"]["optimizer"] != self.config["optimizer"]

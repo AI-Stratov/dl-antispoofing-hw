@@ -76,7 +76,6 @@ def generate_id(length: int = 8) -> str:
         run_id (str): base-36 string with an experiment id.
     """
 
-
     alphabet = string.ascii_lowercase + string.digits
     return "".join(secrets.choice(alphabet) for _ in range(length))
 

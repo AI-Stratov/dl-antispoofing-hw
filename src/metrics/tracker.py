@@ -39,7 +39,6 @@ class MetricTracker:
             n (int): how many times to count this value.
         """
 
-
         value = float(value)
         self._data.loc[key, "total"] += value * n
         self._data.loc[key, "counts"] += n

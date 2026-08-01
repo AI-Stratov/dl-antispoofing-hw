@@ -25,7 +25,6 @@ class LogPowerSpectrogram(nn.Module):
         self.hop_length = hop_length
         self.eps = eps
 
-
         self.register_buffer("window", torch.blackman_window(n_fft))
 
     def forward(self, x):
@@ -45,6 +44,5 @@ class LogPowerSpectrogram(nn.Module):
             return_complex=True,
         )
         power = spectrum.real**2 + spectrum.imag**2
-
 
         return torch.log(power + self.eps).unsqueeze(1)

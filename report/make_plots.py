@@ -67,7 +67,6 @@ def plot_training(history, out):
 
     fig, (left, right) = plt.subplots(1, 2, figsize=(11, 4))
 
-
     train_epoch = train["_step"] / STEPS_PER_EPOCH
     left.plot(train_epoch, train["loss_train"], lw=0.5, alpha=0.25, color="tab:blue")
 
@@ -262,8 +261,6 @@ def plot_seed_spread(runs, out):
 
 
 def main():
-
-
     saved = ROOT / "saved"
     lfcc_runs = {}
     for name in ("lfcc_seed1", "lfcc_seed2", "lfcc_seed3", "lfcc_weighted"):

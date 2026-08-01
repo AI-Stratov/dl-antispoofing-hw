@@ -23,12 +23,10 @@ def plot_images(imgs, config):
     figsize = config.writer.figsize
     fig, axes = plt.subplots(1, len(names), figsize=figsize)
     for i in range(len(names)):
-
         img = imgs[i].permute(1, 2, 0)
         axes[i].imshow(img)
         axes[i].set_title(names[i])
         axes[i].axis("off")
-
 
     buf = io.BytesIO()
     fig.tight_layout()

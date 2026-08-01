@@ -62,16 +62,12 @@ class Inferencer(BaseTrainer):
         self.model = model
         self.batch_transforms = batch_transforms
 
-
         self.evaluation_dataloaders = {k: v for k, v in dataloaders.items()}
-
 
         self.save_path = save_path
 
-
         self.predictions_name = config.inferencer.get("predictions_name", "predictions")
         self.eer = EER()
-
 
         self.metrics = metrics
         if self.metrics is not None:
@@ -83,7 +79,6 @@ class Inferencer(BaseTrainer):
             self.evaluation_metrics = None
 
         if not skip_model_load:
-
             self._from_pretrained(config.inferencer.get("from_pretrained"))
 
     def run_inference(self):
@@ -153,7 +148,6 @@ class Inferencer(BaseTrainer):
         self.evaluation_metrics.reset()
         self.eer.reset()
         self.predictions = []
-
 
         if self.save_path is not None:
             (self.save_path / part).mkdir(exist_ok=True, parents=True)

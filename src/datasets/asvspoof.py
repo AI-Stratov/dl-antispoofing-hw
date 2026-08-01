@@ -115,7 +115,6 @@ class ASVspoof2019LADataset(BaseDataset):
         instance_data = {
             "data_object": waveform,
             "labels": data_dict["label"],
-
             "keys": data_dict["key"],
         }
         return self.preprocess_data(instance_data)

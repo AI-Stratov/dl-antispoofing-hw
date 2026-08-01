@@ -55,9 +55,7 @@ class Trainer(BaseTrainer):
             if self.lr_scheduler is not None:
                 self.lr_scheduler.step()
         else:
-
             self.eer.update(batch["logits"], batch["labels"])
-
 
         for loss_name in self.config.writer.loss_names:
             metrics.update(loss_name, batch[loss_name].item())
@@ -97,7 +95,6 @@ class Trainer(BaseTrainer):
                 )
             self.writer.set_step(epoch * self.epoch_len, part)
 
-
             self.writer.add_scalar("epoch", epoch)
             self._log_scalars(self.evaluation_metrics)
             self._log_batch(batch_idx, batch, part)
@@ -121,7 +118,6 @@ class Trainer(BaseTrainer):
             mode (str): train or inference. Defines which logging
                 rules to apply.
         """
-
 
         if mode == "train" and batch_idx == 0:
             self.writer.add_image(

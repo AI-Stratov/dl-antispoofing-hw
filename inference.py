@@ -26,16 +26,12 @@ def main(config):
 
     device = resolve_device(config.inferencer.device)
 
-
     dataloaders, batch_transforms = get_dataloaders(config, device)
-
 
     model = instantiate(config.model).to(device)
     print(model)
 
-
     metrics = instantiate(config.metrics)
-
 
     save_path = ROOT_PATH / "data" / "saved" / config.inferencer.save_path
     save_path.mkdir(exist_ok=True, parents=True)
