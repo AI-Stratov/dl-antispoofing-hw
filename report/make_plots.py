@@ -29,7 +29,7 @@ PROTOCOL = (
 )
 
 HISTORY = REPORT_DIR / "wandb_4-fft-zero-pad-final.csv"
-PREDICTIONS = ROOT / "epoch20.csv"
+PREDICTIONS = ROOT / "avistratov.csv"
 
 
 STEPS_PER_EPOCH = 3172
